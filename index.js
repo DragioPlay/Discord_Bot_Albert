@@ -48,15 +48,24 @@ const gifList = [
     "https://tenor.com/view/red-hearing-peak-gif-185358842424781252",
     "https://tenor.com/view/nerd-gif-2082201468927088900",
     "https://tenor.com/view/funny-gif-15699071694512129415",
+    "https://tenor.com/view/squid-game-squid-game-2-cheers-happy-excited-gif-13406404385856133045",
+    "https://tenor.com/view/meme-lol-funny-ishowspeed-speed-gif-4447579427962695724",
+    "https://tenor.com/view/xenoverse-goku-super-saiyan-angry-dbz-gif-1416275111944307575",
+    "https://tenor.com/view/caitvitwt-zaunvi-stantwt-two-people-you-like-fighting-gif-9941917658589461428",
+    "https://tenor.com/view/ishowspeed-ishowspeed-fortnite-fortnite-ishowspeed-cheeks-ishowspeed-blow-gif-8384090200881199846",
+    "https://tenor.com/view/ishowspeed-ishowspeed-yeah-right-ishowspeed-yeah-ishowspeed-right-ishowspeed-stream-gif-2870397197282141259",
+    "https://tenor.com/view/calm-gif-8293915206003753096",
+    "https://tenor.com/view/all-in-his-mind-all-in-his-head-delusional-delusion-insanity-gif-12255351800206495360",
+    "https://tenor.com/view/riddler-paul-dano-new-rockstars-does-he-know-gif-26833694"
 ];
 
 // List of emojis to randomly react with
-const emojiList = ["👍🏿", "😭", "🔥", "😍", "😡", "😮", "❤️", "🤣", "🫃🏻", "👀", "😋"];
+const emojiList = ["👍🏿", "😭", "🔥", "😍", "😡", "😮", "❤️", "🤣", "🫃🏻", "👀", "😋","👅","🥵","🥶","🤯","😑"];
 
 // Counter to track when to send a gif (every 1–5 messages)
-let gifcount = 0;
+let messagecount = 0;
 
-// Random integer generator for the gif counter
+// Random integer generator for the message counter
 function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -136,14 +145,16 @@ client.on("messageCreate", async (message) => {
         message.reply("Roger Albert Dvorani!");
     }
 
-    // React to every message with a random emoji from the list
-    message.react(emojiList[Math.floor(Math.random() * emojiList.length)]);
+    // Reacts to 1 to 3 messages with a random emoji from the list
+    if (messagecount >= randomIntFromInterval(1, 3)) {
+        message.react(emojiList[Math.floor(Math.random() * emojiList.length)]);
+    }
 
-    // Increment the gif counter and send a random gif every 1–5 messages
-    gifcount++;
-    if (gifcount >= randomIntFromInterval(3, 7)) {
+    // Increment the message counter and send a random gif every 1–5 messages
+    messagecount++;
+    if (messagecount >= randomIntFromInterval(3, 7)) {
         message.reply(randomGif());
-        gifcount = 0;
+        messagecount = 0;
     }
 
     // If the bot is mentioned, ask the AI and reply with the response
